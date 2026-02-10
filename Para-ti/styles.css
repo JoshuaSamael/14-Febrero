@@ -705,7 +705,7 @@ transform: scale(1.05);
    ============================================ */
 .ramo {
     position: absolute;
-    bottom: -15vmin; /* Cambiado de 2vmin a -5vmin para bajarlo más */
+    bottom: -25vmin; /* Cambiado de 2vmin a -5vmin para bajarlo más */
     left: 50%;
     transform: translateX(-50%) scale(0.85); /* Más grande de 0.65 a 0.95 */
     z-index: 1; /* Cambiado de 5 a 1 para que quede detrás de las flores */
