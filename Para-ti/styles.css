@@ -812,7 +812,7 @@ transform: scale(1.05);
 @media (max-width: 480px) {
     .special-text {
         top: 2%;
-        width: 4%;
+        width: 94%;
     }
     
     .modal-titulo {
