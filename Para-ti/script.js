@@ -20,12 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function ajustarTamanoFuente(elemento, texto) {
     const longitud = texto.length;
     
-    if (longitud < 50) {
-        elemento.style.fontSize = 'clamp(1.4rem, 4vw, 2.2rem)';
-    } else if (longitud < 80) {
-        elemento.style.fontSize = 'clamp(1.1rem, 3.2vw, 1.8rem)';
+    if (longitud < 100) {
+        elemento.style.fontSize = '2.2rem'; // frases cortas y medianas → igual que la primera
     } else {
-        elemento.style.fontSize = 'clamp(0.95rem, 2.8vw, 1.5rem)';
+        elemento.style.fontSize = '1.6rem'; // solo baja si es muy larga (100+ caracteres)
     }
 }
 
