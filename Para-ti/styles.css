@@ -326,12 +326,11 @@ transform: scale(1.05);
    ============================================ */
 .special-text {
     position: fixed;
-    top: 5%;
+    top: 3%;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Great Vibes', cursive;
     font-size: clamp(1.1rem, 3.5vw, 2.2rem);
-    font-size: 2.2rem;
     color: #E8D5C4;
     text-align: center;
     z-index: 100;
@@ -340,11 +339,13 @@ transform: scale(1.05);
         0 0 10px rgba(232, 213, 196, 0.8),
         0 0 20px rgba(138, 180, 248, 0.6),
         0 0 30px rgba(74, 144, 226, 0.4);
-    max-width: 85%;
-    max-height: 35vh;
+    width: 88%;
+    max-width: 520px;
+    max-height: 38vh;
     animation: fadeInText 2s ease-in forwards;
     animation-delay: 1s;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+    word-break: keep-all;
 }
 
 @keyframes fadeInText {
@@ -787,9 +788,8 @@ transform: scale(1.05);
    ============================================ */
 @media (max-width: 768px) {
     .special-text {
-        font-size: 1.5rem;
-        top: 3%;
-        max-width: 90%;
+        top: 2%;
+        max-width: 92%;
     }
     
     .modal-titulo {
@@ -812,8 +812,8 @@ transform: scale(1.05);
 
 @media (max-width: 480px) {
     .special-text {
-        font-size: 2rem;
         top: 2%;
+        width: 4%;
     }
     
     .modal-titulo {
