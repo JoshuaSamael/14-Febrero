@@ -1,0 +1,842 @@
+/* ============================================
+   RESET Y VARIABLES
+   ============================================ */
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-color: #0f0c29;
+    --fl-speed: 0.8s;
+    --speed-leaf: 2s;
+    --blue-primary: #4A90E2;
+    --blue-light: #87CEEB;
+    --blue-dark: #2E5C8A;
+}
+
+body {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    overflow: hidden;
+    perspective: 1000px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* ============================================
+   PANTALLA DE INICIO
+   ============================================ */
+.modal-inicio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+    backdrop-filter: blur(2.5px);
+    animation: modalFadeIn 1.2s;
+}
+
+.image-bonita{
+    width: 220px;              
+  max-width: 100%;
+  display: block;
+  margin: 20px auto;         
+  border-radius: 20px;       
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-bonita:hover{
+transform: scale(1.05);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-contenido {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 32px;
+    box-shadow: 0 8px 48px rgba(74, 144, 226, 0.3);
+    padding: 3.5em 2.5em 2.5em 2.5em;
+    text-align: center;
+    min-width: 320px;
+    max-width: 90vw;
+    border: 2.5px solid var(--blue-primary);
+    position: relative;
+    animation: modalContentPop 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes modalContentPop {
+    0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+    80% { transform: scale(1.05) translateY(-8px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-titulo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--blue-primary);
+    margin-bottom: 0.5em;
+    text-shadow: 0 2px 16px rgba(74, 144, 226, 0.4);
+    letter-spacing: 1px;
+}
+
+.modal-texto {
+    font-size: 1.2em;
+    color: #222;
+    margin-bottom: 2em;
+    opacity: 0.8;
+}
+
+.btn-para-ti {
+    padding: 1em 2.5em;
+    font-size: 1.3em;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--blue-primary);
+    border: 2px solid var(--blue-primary);
+    box-shadow: 0 0 24px rgba(74, 144, 226, 0.3);
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-para-ti:hover {
+    background: white;
+    box-shadow: 0 0 32px rgba(74, 144, 226, 0.5);
+    transform: scale(1.05);
+}
+
+.btn-para-ti svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================
+   FONDO NOCTURNO
+   ============================================ */
+.night {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.night::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 60px 70px, white, transparent),
+        radial-gradient(1px 1px at 50px 50px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, white, transparent),
+        radial-gradient(2px 2px at 90px 10px, white, transparent);
+    background-size: 200px 200px;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ============================================
+   PARTÍCULAS FLOTANTES
+   ============================================ */
+.particles {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.particle {
+    position: absolute;
+    bottom: 0;
+    width: 0.7vmin;
+    height: 0.7vmin;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: particle-up linear infinite;
+}
+
+@keyframes particle-up {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   ESTRELLAS FUGACES
+   ============================================ */
+.shooting-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: shootingStar 3s linear infinite;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    animation: shootingStarTail 3s linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+    top: 5%;
+    left: -10%;
+    animation-delay: 0s;
+    animation-duration: 2.5s;
+}
+
+.shooting-star:nth-child(2) {
+    top: 15%;
+    left: -10%;
+    animation-delay: 2s;
+    animation-duration: 3s;
+}
+
+.shooting-star:nth-child(3) {
+    top: 25%;
+    left: -10%;
+    animation-delay: 4s;
+    animation-duration: 2.8s;
+}
+
+.shooting-star:nth-child(4) {
+    top: 0%;
+    left: -10%;
+    animation-delay: 6s;
+    animation-duration: 3.2s;
+}
+
+.shooting-star:nth-child(5) {
+    top: 35%;
+    left: -10%;
+    animation-delay: 8s;
+    animation-duration: 2.7s;
+}
+
+.shooting-star:nth-child(6) {
+    top: 8%;
+    left: -10%;
+    animation-delay: 10s;
+    animation-duration: 3.1s;
+}
+
+.shooting-star:nth-child(7) {
+    top: 45%;
+    left: -10%;
+    animation-delay: 12s;
+    animation-duration: 2.9s;
+}
+
+.shooting-star:nth-child(8) {
+    top: 3%;
+    left: -10%;
+    animation-delay: 14s;
+    animation-duration: 3.3s;
+}
+
+@keyframes shootingStar {
+    0% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotate(45deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(120vw) translateY(50vh) rotate(10deg);
+    }
+}
+
+@keyframes shootingStarTail {
+    0% { width: 0; }
+    30% { width: 100px; }
+    100% { width: 0; }
+}
+
+/* ============================================
+   TEXTO ESPECIAL
+   ============================================ */
+.special-text {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: #E8D5C4;
+    text-align: center;
+    z-index: 100;
+    opacity: 0;
+    text-shadow: 
+        0 0 10px rgba(232, 213, 196, 0.8),
+        0 0 20px rgba(138, 180, 248, 0.6),
+        0 0 30px rgba(74, 144, 226, 0.4);
+    max-width: 85%;
+    animation: fadeInText 2s ease-in forwards;
+    animation-delay: 1s;
+    padding: 0 1rem;
+}
+
+@keyframes fadeInText {
+    to { opacity: 1; }
+}
+
+/* ============================================
+   CONTENEDOR DE FLORES
+   ============================================ */
+.flowers {
+    position: relative;
+    transform: scale(0.7) translateY(-7vmin);
+    z-index: 2;
+    width: 100%;
+}
+
+.flower {
+    position: absolute;
+    bottom: 22vmin;
+    transform-origin: bottom center;
+    z-index: 50;
+}
+
+/* ============================================
+   POSICIONAMIENTO Y ANIMACIONES DE FLORES - MEJORADO
+   ============================================ */
+
+/* Flor central - la más alta (ATRÁS) */
+.flower--1 {
+    left: 50%;
+    animation: moving-flower-1 4s linear infinite;
+    z-index: 10; /* Más atrás porque es la más alta */
+}
+
+.flower--1 .flower__line {
+    height: 75vmin; /* La más alta */
+    animation-delay: 0.3s;
+}
+
+/* Flores laterales principales - altura media-alta (MEDIO-ATRÁS) */
+.flower--2 {
+    left: 36%;
+    transform: rotate(10deg);
+    animation: moving-flower-2 4s linear infinite;
+    z-index: 15;
+}
+
+.flower--2 .flower__line {
+    height: 68vmin;
+    animation-delay: 0.6s;
+}
+
+.flower--3 {
+    left: 64%;
+    transform: rotate(-10deg);
+    animation: moving-flower-3 4s linear infinite;
+    z-index: 15;
+}
+
+.flower--3 .flower__line {
+    height: 70vmin;
+    animation-delay: 0.9s;
+}
+
+/* Flores cerca del centro - altura media (MEDIO) */
+.flower--4 {
+    left: 43%;
+    z-index: 25;
+    transform: rotate(6deg);
+    animation: moving-flower-4 3.5s linear infinite;
+}
+
+.flower--4 .flower__line {
+    height: 62vmin;
+    animation-delay: 1.2s;
+}
+
+.flower--5 {
+    left: 57%;
+    z-index: 25;
+    transform: rotate(-6deg);
+    animation: moving-flower-5 4.5s linear infinite;
+}
+
+.flower--5 .flower__line {
+    height: 64vmin;
+    animation-delay: 1.9s;
+}
+
+/* Flores exteriores - más cortas (MEDIO-FRENTE) */
+.flower--6 {
+    left: 28%;
+    transform: rotate(-12deg);
+    z-index: 35;
+}
+
+.flower--6 .flower__line {
+    height: 56vmin;
+    animation-delay: 2.3s;
+}
+
+.flower--7 {
+    left: 72%;
+    transform: rotate(12deg);
+    z-index: 35;
+}
+
+.flower--7 .flower__line {
+    height: 58vmin;
+    animation-delay: 2.6s;
+}
+
+/* Flores más exteriores - las más cortas (AL FRENTE) */
+.flower--8 {
+    left: 20%;
+    transform: rotate(-18deg);
+    z-index: 50; /* Al frente porque es la más corta */
+}
+
+.flower--8 .flower__line {
+    height: 50vmin;
+    animation-delay: 2.9s;
+}
+
+.flower--9 {
+    left: 80%;
+    transform: rotate(18deg);
+    z-index: 50; /* Al frente porque es la más corta */
+}
+
+.flower--9 .flower__line {
+    height: 52vmin;
+    animation-delay: 3.2s;
+}
+
+/* ============================================
+   PÉTALOS DE TULIPANES AZULES
+   ============================================ */
+.flower__leafs {
+    position: relative;
+    animation: blooming-flower 2s backwards;
+}
+
+.flower__leafs--1 { animation-delay: 1.1s; }
+.flower__leafs--2 { animation-delay: 1.4s; }
+.flower__leafs--3 { animation-delay: 1.7s; }
+.flower__leafs--4 { animation-delay: 2.0s; }
+.flower__leafs--5 { animation-delay: 2.0s; }
+.flower__leafs--6 { animation-delay: 2.3s; }
+.flower__leafs--7 { animation-delay: 2.6s; }
+.flower__leafs--8 { animation-delay: 2.9s; }
+.flower__leafs--9 { animation-delay: 3.2s; }
+
+.flower__leafs::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -100%);
+    width: 8vmin;
+    height: 8vmin;
+    background-color: #87CEEB;
+    filter: blur(10vmin);
+}
+
+/* --- PÉTALOS DE TULIPÁN AZULES --- */
+.flower__leaf {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 9vmin;
+    height: 15vmin;
+    background: radial-gradient(
+        circle at 50% 20%, 
+        #B8E0FF 0%, 
+        #87CEEB 30%, 
+        var(--blue-primary) 60%, 
+        #3680C5 85%, 
+        var(--blue-dark) 100%
+    );
+    border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+    transform-origin: bottom center;
+    opacity: 0.97;
+    z-index: 2;
+    border: 1.5px solid #5BA4E8;
+    box-shadow:
+        0 0 1vmin #B8E0FF,
+        0 0 0.5vmin #D6F0FF,
+        inset 0 0 1.5vmin #3680C5;
+}
+
+/* Pétalos externos */
+.flower__leaf--1 { 
+    transform: translate(-50%, -5%) rotate(-22deg); 
+    z-index: 1; 
+}
+
+.flower__leaf--2 { 
+    transform: translate(-50%, -5%) rotate(22deg);  
+    z-index: 1; 
+}
+
+.flower__leaf--3 { 
+    transform: translate(-50%, -10%) rotate(0deg);  
+    z-index: 2; 
+}
+
+/* Pétalos internos */
+.flower__leaf--4,
+.flower__leaf--5,
+.flower__leaf--6 {
+    width: 7vmin;
+    height: 12vmin;
+    background: radial-gradient(
+        circle at 50% 20%, 
+        #B8E0FF 0%, 
+        #87CEEB 30%, 
+        var(--blue-primary) 60%, 
+        #3680C5 85%, 
+        var(--blue-dark) 100%
+    );
+    opacity: 0.96;
+    border: 1px solid #5BA4E8;
+    border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%;
+    box-shadow:
+        0 0 0.8vmin #B8E0FF,
+        inset 0 0 1vmin #87CEEB;
+    z-index: 3;
+}
+
+.flower__leaf--4 { transform: translate(-50%, -8%) rotate(-10deg); }
+.flower__leaf--5 { transform: translate(-50%, -8%) rotate(10deg); }
+.flower__leaf--6 { transform: translate(-50%, -12%) rotate(0deg); }
+
+/* Centro del tulipán - oculto */
+.flower__center {
+    display: none;
+}
+
+/* ============================================
+   LUCES MÁGICAS
+   ============================================ */
+.flower__light {
+    position: absolute;
+    bottom: 0vmin;
+    width: 0.8vmin;
+    height: 0.8vmin;
+    background-color: #fff;
+    border-radius: 50%;
+    filter: blur(0.1vmin);
+    animation: tulip-light 6s linear infinite backwards;
+    box-shadow: 0 0 1vmin rgba(255,255,255,0.8);
+}
+
+.flower__light:nth-child(odd) {
+    background-color: #87CEEB;
+}
+
+.flower__light--1 { left: -2vmin; animation-delay: 1s; }
+.flower__light--2 { left: 3vmin; animation-delay: 0.5s; }
+.flower__light--3 { left: -6vmin; animation-delay: 0.3s; }
+.flower__light--4 { left: 6vmin; animation-delay: 0.9s; }
+.flower__light--5 { left: -1vmin; animation-delay: 1.5s; }
+.flower__light--6 { left: -4vmin; animation-delay: 3s; }
+.flower__light--7 { left: 3vmin; animation-delay: 2s; }
+.flower__light--8 { left: -6vmin; animation-delay: 3.5s; }
+
+@keyframes tulip-light {
+    0% {
+        opacity: 0;
+        transform: translateY(0vmin) rotate(0deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(-3vmin) translateX(-1vmin) rotate(45deg);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-8vmin) translateX(1vmin) rotate(90deg);
+    }
+    60% {
+        transform: translateY(-12vmin) translateX(-1vmin) rotate(135deg);
+    }
+    80% {
+        transform: translateY(-16vmin) translateX(2vmin) rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-25vmin) rotate(225deg);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   TALLOS Y HOJAS
+   ============================================ */
+.flower__line {
+    height: 55vmin;
+    width: 2vmin;
+    background-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.3),
+        transparent,
+        rgba(255, 255, 255, 0.2)
+    ),
+    linear-gradient(to top, transparent 10%, #2d5016, #4a7c23, #6b8e23);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.7);
+    animation: grow-flower-tree 4s backwards;
+}
+
+.flower__line__leaf {
+    --w: 8vmin;
+    --h: calc(var(--w) + 3vmin);
+    position: absolute;
+    top: 20%;
+    left: 90%;
+    width: var(--w);
+    height: var(--h);
+    border-top-right-radius: var(--h);
+    border-bottom-left-radius: var(--h);
+    background-image: linear-gradient(
+        to top,
+        rgba(45, 80, 22, 0.6),
+        #4a7c23,
+        #6b8e23
+    );
+    box-shadow: inset 0 0 1vmin rgba(0, 0, 0, 0.3);
+}
+
+.flower__line__leaf--1 {
+    transform: rotate(70deg) rotateY(30deg);
+    animation: blooming-leaf-right var(--fl-speed) 1.6s backwards;
+}
+
+.flower__line__leaf--2 {
+    top: 45%;
+    transform: rotate(70deg) rotateY(30deg);
+    animation: blooming-leaf-right var(--fl-speed) 1.4s backwards;
+}
+
+.flower__line__leaf--3,
+.flower__line__leaf--4 {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: var(--h);
+    border-bottom-right-radius: var(--h);
+    left: -460%;
+    top: 12%;
+    transform: rotate(-70deg) rotateY(30deg);
+    animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+}
+
+.flower__line__leaf--4 {
+    top: 40%;
+    animation-delay: 1s;
+}
+
+/* ============================================
+   RAMO FINAL
+   ============================================ */
+.ramo {
+    position: absolute;
+    bottom: -15vmin; /* Cambiado de 2vmin a -5vmin para bajarlo más */
+    left: 50%;
+    transform: translateX(-50%) scale(0.85); /* Más grande de 0.65 a 0.95 */
+    z-index: 1; /* Cambiado de 5 a 1 para que quede detrás de las flores */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+.ramo--visible {
+    opacity: 1;
+}
+
+.ramo img {
+    width: 65vmin; /* Más grande de 50vmin a 65vmin */
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 30px rgba(74, 144, 226, 0.5));
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes moving-flower-1 {
+    0%, 100% { transform: rotate(2deg); }
+    50% { transform: rotate(-2deg); }
+}
+
+@keyframes moving-flower-2 {
+    0%, 100% { transform: rotate(10deg); }
+    50% { transform: rotate(8deg); }
+}
+
+@keyframes moving-flower-3 {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(-12deg); }
+}
+
+@keyframes moving-flower-4 {
+    0%, 100% { transform: rotate(6deg); }
+    50% { transform: rotate(8deg); }
+}
+
+@keyframes moving-flower-5 {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(-8deg); }
+}
+
+@keyframes blooming-leaf-right {
+    0% {
+        transform-origin: left;
+        transform: rotate(70deg) rotateY(30deg) scale(0);
+    }
+}
+
+@keyframes blooming-leaf-left {
+    0% {
+        transform-origin: right;
+        transform: rotate(-70deg) rotateY(30deg) scale(0);
+    }
+}
+
+@keyframes grow-flower-tree {
+    0% {
+        height: 0;
+        border-radius: 1vmin;
+    }
+}
+
+@keyframes blooming-flower {
+    0% {
+        transform: scale(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .special-text {
+        font-size: 1.5rem;
+        top: 3%;
+        max-width: 90%;
+    }
+    
+    .modal-titulo {
+        font-size: 2.2rem;
+    }
+    
+    .flowers {
+        transform: scale(0.85) translateY(-3vmin); /* Más grande de 0.7 y menos bajado */
+    }
+    
+    .ramo {
+        bottom: -8vmin; /* Menos bajado que en desktop */
+        transform: translateX(-50%) scale(0.85); /* Más grande de 0.8 a 0.85 */
+    }
+    
+    .ramo img {
+        width: 60vmin;
+    }
+}
+
+@media (max-width: 480px) {
+    .special-text {
+        font-size: 2rem;
+        top: 2%;
+    }
+    
+    .modal-titulo {
+        font-size: 1.8rem;
+    }
+    
+    .btn-para-ti {
+        font-size: 1.1em;
+        padding: 0.9em 2em;
+    }
+    
+    .flowers {
+        transform: scale(1) translateY(0); /* Tamaño normal y centrado */
+    }
+    
+    .flower {
+        bottom: 60vmin; /* Ajustar posición base de las flores */
+    }
+    
+    .ramo {
+        bottom: 25vmin; /* Posición más arriba en móvil */
+        transform: translateX(-50%) scale(1); /* Tamaño completo */
+    }
+    
+    .ramo img {
+        width: 70vmin; /* Más grande para que se vea bien */
+    }
+}
