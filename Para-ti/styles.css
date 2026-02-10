@@ -330,7 +330,7 @@ transform: scale(1.05);
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(1.1rem, 3.5vw, 2.2rem);
+    font-size: clamp(2.2rem, 3.5vw, 2.2rem);
     color: #E8D5C4;
     text-align: center;
     z-index: 100;
