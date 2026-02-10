@@ -17,23 +17,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let fraseActual = 0;
 
-    // Función para cambiar frases con fade
-    function rotarFrases() {
-        const specialText = document.querySelector('.special-text');
-        if (!specialText) return;
-
-        // Fade out
-        specialText.style.transition = 'opacity 0.8s ease';
-        specialText.style.opacity = '0';
-
-        setTimeout(() => {
-            fraseActual = (fraseActual + 1) % frases.length;
-            specialText.textContent = `"${frases[fraseActual]}"`;
-
-            // Fade in
-            specialText.style.opacity = '1';
-        }, 800); // Espera a que termine el fade out
+    function ajustarTamanoFuente(elemento, texto) {
+    const longitud = texto.length;
+    
+    if (longitud < 50) {
+        elemento.style.fontSize = 'clamp(1.4rem, 4vw, 2.2rem)';
+    } else if (longitud < 80) {
+        elemento.style.fontSize = 'clamp(1.1rem, 3.2vw, 1.8rem)';
+    } else {
+        elemento.style.fontSize = 'clamp(0.95rem, 2.8vw, 1.5rem)';
     }
+}
+
+// Función para cambiar frases con fade
+function rotarFrases() {
+    const specialText = document.querySelector('.special-text');
+    if (!specialText) return;
+
+    specialText.style.transition = 'opacity 0.8s ease';
+    specialText.style.opacity = '0';
+
+    setTimeout(() => {
+        fraseActual = (fraseActual + 1) % frases.length;
+        const nuevaFrase = `"${frases[fraseActual]}"`;
+        specialText.textContent = nuevaFrase;
+        ajustarTamanoFuente(specialText, nuevaFrase);
+        specialText.style.opacity = '1';
+    }, 800);
+}
 
     // Función para iniciar la experiencia
     btnParaTi.addEventListener('click', function() {
@@ -92,6 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Poner la primera frase del array
+const specialText = document.querySelector('.special-text');
+if (specialText) {
+    const primeraFrase = `"${frases[0]}"`;
+    specialText.textContent = primeraFrase;
+    ajustarTamanoFuente(specialText, primeraFrase);
+}
 
 // Agregar animación de fade out al CSS dinámicamente si no existe
 const style = document.createElement('style');

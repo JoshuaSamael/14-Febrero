@@ -330,6 +330,7 @@ transform: scale(1.05);
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.1rem, 3.5vw, 2.2rem);
     font-size: 2.2rem;
     color: #E8D5C4;
     text-align: center;
@@ -340,6 +341,7 @@ transform: scale(1.05);
         0 0 20px rgba(138, 180, 248, 0.6),
         0 0 30px rgba(74, 144, 226, 0.4);
     max-width: 85%;
+    max-height: 35vh;
     animation: fadeInText 2s ease-in forwards;
     animation-delay: 1s;
     padding: 0 1rem;
