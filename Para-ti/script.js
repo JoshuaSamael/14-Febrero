@@ -5,6 +5,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const contenidoPrincipal = document.getElementById('contenido-principal');
     const audioParaTi = document.getElementById('audio-para-ti');
 
+    const frases = [
+        "Conocerte fue como una canción que se quedó conmigo.",
+        "No fuimos nada, pero lo poco que fuimos alcanzó para pintarme por dentro.",
+        "No duró, pero mientras duró, fue de las cosas más reales que he sentido.",
+        "Te guardo en ese cajón donde uno pone las cosas bonitas que no supo sostener.",
+        "Tienes algo que no sé nombrar, pero que se nota desde lejos.",
+        "Fuiste el 'qué hubiera pasado' más bonito que me ha quedado pendiente.",
+        "Esto es solo un poco de lo mucho que me importaste. Cuídate, y que la vida te trate bonito."
+    ];
+
+    let fraseActual = 0;
+
+    // Función para cambiar frases con fade
+    function rotarFrases() {
+        const specialText = document.querySelector('.special-text');
+        if (!specialText) return;
+
+        // Fade out
+        specialText.style.transition = 'opacity 0.8s ease';
+        specialText.style.opacity = '0';
+
+        setTimeout(() => {
+            fraseActual = (fraseActual + 1) % frases.length;
+            specialText.textContent = `"${frases[fraseActual]}"`;
+
+            // Fade in
+            specialText.style.opacity = '1';
+        }, 800); // Espera a que termine el fade out
+    }
+
     // Función para iniciar la experiencia
     btnParaTi.addEventListener('click', function() {
         // Reproducir audio
@@ -18,9 +48,16 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             pantallaInicial.style.display = 'none';
             contenidoPrincipal.style.display = 'block';
+
+            const specialText = document.querySelector('.special-text');
+            if (specialText) {
+                specialText.textContent = `"${frases[0]}"`;
+            }
             
             // Crear partículas
             createParticles();
+
+            setInterval(rotarFrases, 5000);
             
             // Mostrar ramo después de que las flores crezcan
             setTimeout(() => {
