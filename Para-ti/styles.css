@@ -345,7 +345,6 @@ transform: scale(1.05);
     animation: fadeInText 2s ease-in forwards;
     animation-delay: 1s;
     padding: 0 0.5rem;
-    word-break: keep-all;
 }
 
 @keyframes fadeInText {
